@@ -15,6 +15,16 @@ require("mason-lspconfig").setup({
 
 local lspconfig = require("lspconfig")
 
+
+lspconfig.clangd.setup {
+    on_attach = function(client, bufnr)
+        client.server_capabilities.signatureHelpProvider = false
+        on_attach(client, bufnr)
+    end,
+    capabilities = capabilities,
+} -- lspconfig.clangd.setup
+
+
 lspconfig.rust_analyzer.setup {
     on_attach = on_attach,
     capabilities = capabilities,
@@ -27,6 +37,6 @@ lspconfig.rust_analyzer.setup {
             }
         }
     }
-}
+} -- lspconfig.rust_analyzer.setup
 
 -- file lsp.lua

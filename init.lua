@@ -2,8 +2,10 @@
 
 require("options")
 require("plugins")
-require("lsp")
+require("lsp_config")
+require("cmp_config")
 require("colorscheme")
 require("mappings")
 
 -- file init.lua
+
