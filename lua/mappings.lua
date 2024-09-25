@@ -1,20 +1,19 @@
--- Keymap configuration file
+-- keymap configuration file
 
-
--- Keymaps
+-- keymaps
 local keymaps = {
 
-    -- Buffer navigation
+    -- buffer navigation
     ['<C-h>'] = {'n', '<C-w>h', 'Window left'},
     ['<C-j>'] = {'n', '<C-w>j', 'Window down'},
     ['<C-k>'] = {'n', '<C-w>k', 'Window up'},
     ['<C-l>'] = {'n', '<C-w>l', 'Window right'},
 
-    -- NVIM Tree
+    -- nvim Tree
     ['<C-n>'] = {'n', ':NvimTreeOpen<cr>', 'Open NVIM tree'},
 }
 
--- Apply keymaps
+-- apply keymaps
 for map, info in pairs(keymaps) do
     vim.keymap.set(info[1], map, info[2])
 end

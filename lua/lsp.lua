@@ -1,7 +1,9 @@
 -- LSP Configuration file
 
 -- Mason configuration
-require("mason").setup({})
+require("mason").setup({
+
+})
 
 -- Mason LSPConfig configuration
 require("mason-lspconfig").setup({
@@ -12,5 +14,19 @@ require("mason-lspconfig").setup({
 })
 
 local lspconfig = require("lspconfig")
+
+lspconfig.rust_analyzer.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = {"rust"},
+    root_dir = lspconfig.util.root_pattern("Cargo.toml"),
+    settings = {
+        ['rust-analyzer'] = {
+            cargo = {
+                allFeatures = true,
+            }
+        }
+    }
+}
 
 -- file lsp.lua

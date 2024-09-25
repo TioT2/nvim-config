@@ -1,5 +1,6 @@
 -- plugin configuration setup file
 
+-- install and setup Lazy plugin
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
     vim.fn.system({
@@ -17,6 +18,9 @@ vim.opt.rtp:prepend(lazypath)
 -- initialize plugins
 local plugins = {
     {
+        "catppuccin/nvim",
+    },
+    {
         "williamboman/mason.nvim",
     },
     {
@@ -29,6 +33,18 @@ local plugins = {
         "nvim-tree/nvim-tree.lua",
         config = function()
             require("nvim-tree").setup({})
+        end,
+    },
+    {
+        "nvim-treesitter/nvim-treesitter",
+        config = function()
+            local configs = require("nvim-treesitter.configs")
+
+            configs.setup({
+                ensure_installed = {"lua", "rust"},
+                sync_install = false,
+                highlight = { enable = true },
+            })
         end,
     },
 }
