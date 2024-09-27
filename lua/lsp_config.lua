@@ -17,19 +17,18 @@ local lspconfig = require("lspconfig")
 
 
 lspconfig.clangd.setup {
-    on_attach = function(client, bufnr)
-        client.server_capabilities.signatureHelpProvider = false
-        on_attach(client, bufnr)
-    end,
-    capabilities = capabilities,
+    root_dir = lspconfig.util.root_pattern("CMakeLists.txt"),
 } -- lspconfig.clangd.setup
 
 
 lspconfig.rust_analyzer.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
     filetypes = {"rust"},
-    root_dir = lspconfig.util.root_pattern("Cargo.toml"),
+    root_dir = function(name)
+        return lspconfig.util.root_pattern(
+            "Cargo.toml",
+            "Makefile"
+        )(name)
+    end,
     settings = {
         ['rust-analyzer'] = {
             cargo = {
