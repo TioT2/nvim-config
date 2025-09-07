@@ -1,4 +1,4 @@
--- plugin configuration setup file
+-- plugin setup file
 
 -- install and setup Lazy plugin
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -19,18 +19,29 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = {
     -- plugins
     "catppuccin/nvim",
+    "folke/tokyonight.nvim",
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
 
-    -- cmp utils
+    -- autocomplete utils
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/nvim-cmp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
 
-    -- tree
+    -- debugging utils
+    "nvim-neotest/nvim-nio",
+    "mfussenegger/nvim-dap",
+    "rcarriga/nvim-dap-ui",
+    "jay-babu/mason-nvim-dap.nvim", -- do smth with this trash
+
+    -- Buffer line and developer icons
+    "nvim-tree/nvim-web-devicons",
+    "akinsho/bufferline.nvim",
+
+    -- nvim-tree
     {
         "nvim-tree/nvim-tree.lua",
         config = function()
@@ -38,7 +49,7 @@ local plugins = {
         end,
     },
 
-    -- syntax highlighting
+    -- syntax highlighting (treesitter)
     {
         "nvim-treesitter/nvim-treesitter",
         config = function()
@@ -53,6 +64,12 @@ local plugins = {
     },
 }
 
+-- setup "Lazy" package manager
 require("lazy").setup(plugins)
+
+
+-- setup "Mason" package manager
+require("mason").setup({})
+
 
 -- file plugins.lua

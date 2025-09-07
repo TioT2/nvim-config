@@ -10,10 +10,13 @@ cmp.setup({
     },
     mapping = cmp.mapping.preset.insert({
         ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-j>'] = cmp.mapping.scroll_docs(4),
+        ['<C-k>'] = cmp.mapping.scroll_docs(-4),
     }),
+    -- Snippet sources
     sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
         { name = 'buffer'   },
+        { name = 'nvim_lsp' },
     })
 })
 

@@ -1,10 +1,5 @@
 -- LSP Configuration file
 
--- Mason configuration
-require("mason").setup({
-
-})
-
 -- Mason LSPConfig configuration
 require("mason-lspconfig").setup({
     ensure_installed = {
@@ -16,12 +11,14 @@ require("mason-lspconfig").setup({
 
 local lspconfig = require("lspconfig")
 
-
+-- Setup C/C++ LSP
 lspconfig.clangd.setup {
-    root_dir = lspconfig.util.root_pattern("CMakeLists.txt"),
+    root_dir = function(name)
+        return lspconfig.util.root_pattern("build/compile_commands.json")(name)
+    end,
 } -- lspconfig.clangd.setup
 
-
+-- Setup Rust LSP
 lspconfig.rust_analyzer.setup {
     filetypes = {"rust"},
     root_dir = function(name)
@@ -31,7 +28,7 @@ lspconfig.rust_analyzer.setup {
         )(name)
     end,
     settings = {
-        ['rust-analyzer'] = {
+        ["rust-analyzer"] = {
             cargo = {
                 allFeatures = true,
             }
