@@ -9,20 +9,21 @@ require("mason-lspconfig").setup({
     },
 })
 
-local lspconfig = require("lspconfig")
-
--- Setup C/C++ LSP
-lspconfig.clangd.setup {
+vim.lsp.config('clangd', {
     root_dir = function(name)
-        return lspconfig.util.root_pattern("build/compile_commands.json")(name)
+        return vim.lsp.config.util.root_pattern("build/compile_commands.json")(name)
     end,
-} -- lspconfig.clangd.setup
+})
+vim.lsp.enable('clangd')
+
+-- Setup haskell LSP
+vim.lsp.enable('hls')
 
 -- Setup Rust LSP
-lspconfig.rust_analyzer.setup {
+vim.lsp.config('rust-analyzer', {
     filetypes = {"rust"},
     root_dir = function(name)
-        return lspconfig.util.root_pattern(
+        return vim.lsp.config.util.root_pattern(
             "Cargo.toml",
             "Makefile"
         )(name)
@@ -34,6 +35,7 @@ lspconfig.rust_analyzer.setup {
             }
         }
     }
-} -- lspconfig.rust_analyzer.setup
+})
+vim.lsp.enable('rust-analyzer')
 
 -- file lsp.lua
